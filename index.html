@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GEMBA Center — TENNECO Chonburi</title>
+<meta name="description" content="ศูนย์รวมลิงก์งาน GEMBA (QC / Safety / LSW &amp; 5S) โรงงาน TENNECO ชลบุรี">
+<meta name="color-scheme" content="light">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231565D8'/%3E%3Cpath d='M18 33.5l9.5 9.5L46 24' stroke='white' stroke-width='6.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   TENNECO Chonburi — GEMBA Center
+   Design tokens: navy / blue / white corporate system
+   ============================================================ */
+*,*::before,*::after{box-sizing:border-box}
+:root{
+  --navy-950:#061A38; --navy-900:#0A2551; --navy-800:#123A73;
+  --blue-700:#1B4FA6; --blue-600:#1565D8; --blue-500:#2E86F0; --sky-400:#4FB3F6;
+  --ink:#0B1B33; --ink-2:#25395A; --muted:#55688A;
+  --line:#DCE6F3; --line-2:#EAF1FA;
+  --bg:#EDF2F9; --surface:#FFFFFF; --surface-2:#F5F8FD;
+  --ok:#0E7A4E; --ok-bg:#E3F5EB; --ok-line:#BCE6CE;
+  --warn:#8A5A06; --warn-bg:#FDF3DE; --warn-line:#F0DCAE;
+  --danger:#C02525; --danger-bg:#FCECEC;
+  --r-sm:10px; --r-md:14px; --r-lg:18px; --r-xl:24px;
+  --sh-1:0 1px 2px rgba(11,27,51,.05),0 2px 6px rgba(11,27,51,.05);
+  --sh-2:0 8px 20px rgba(11,27,51,.08),0 2px 6px rgba(11,27,51,.05);
+  --sh-3:0 22px 48px rgba(10,37,81,.18),0 8px 16px rgba(10,37,81,.08);
+  --ease:cubic-bezier(.22,.61,.36,1);
+  --maxw:1140px;
+}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0; min-height:100dvh; color:var(--ink);
+  font-family:'IBM Plex Sans Thai','IBM Plex Sans','Noto Sans Thai','Segoe UI',Tahoma,sans-serif;
+  font-size:16px; line-height:1.6;
+  background:
+    radial-gradient(1100px 520px at 8% -12%, #D9E8FB 0%, rgba(217,232,251,0) 62%),
+    radial-gradient(900px 460px at 96% -6%, #E2EEFC 0%, rgba(226,238,252,0) 58%),
+    var(--bg);
+  background-repeat:no-repeat;
+}
+h1,h2,h3{margin:0;line-height:1.25;letter-spacing:-.01em}
+p{margin:0}
+a{color:var(--blue-700)}
+:focus-visible{outline:3px solid #6FA9F2;outline-offset:2px;border-radius:6px}
+.skip{position:absolute;left:-9999px;top:0;z-index:200;background:var(--navy-900);color:#fff;padding:12px 18px;border-radius:0 0 12px 0}
+.skip:focus{left:0}
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:clamp(16px,4vw,32px)}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* ---------- Top bar ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.88);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
+.topbar__in{display:flex;align-items:center;gap:14px;min-height:70px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}
+.brand__mark{width:42px;height:42px;border-radius:12px;flex:none;display:grid;place-items:center;
+  background:linear-gradient(145deg,var(--blue-600),var(--navy-800));box-shadow:0 6px 14px rgba(21,101,216,.3)}
+.brand__mark svg{width:23px;height:23px;color:#fff}
+.brand__name{display:block;font-weight:700;font-size:16.5px;letter-spacing:.14em;color:var(--navy-900);line-height:1.2;white-space:nowrap}
+.brand__sub{display:none;font-size:12.5px;color:var(--muted);white-space:nowrap}
+.topbar__spacer{flex:1}
+.topbar__actions{display:flex;align-items:center;gap:10px}
+.topbar .hide-sm{display:none}
+@media (min-width:560px){.brand__sub{display:block}}
+@media (min-width:720px){.topbar .hide-sm{display:inline-flex}}
+
+/* ---------- Buttons ---------- */
+.btn{--btn-bg:var(--surface);--btn-fg:var(--navy-900);--btn-bd:var(--line);
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;
+  min-height:44px;padding:0 18px;border-radius:12px;border:1px solid var(--btn-bd);
+  background:var(--btn-bg);color:var(--btn-fg);
+  font:inherit;font-size:15px;font-weight:600;text-decoration:none;cursor:pointer;white-space:nowrap;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease),filter .18s var(--ease);
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.btn svg{width:19px;height:19px;flex:none}
+.btn:hover{transform:translateY(-1px);box-shadow:var(--sh-2)}
+.btn:active{transform:translateY(0) scale(.985)}
+.btn--primary{--btn-bg:linear-gradient(180deg,var(--blue-500),var(--blue-600));--btn-fg:#fff;--btn-bd:transparent;
+  box-shadow:0 8px 18px rgba(21,101,216,.28)}
+.btn--primary:hover{filter:brightness(1.05);box-shadow:0 12px 24px rgba(21,101,216,.34)}
+.btn--soft{--btn-bg:var(--surface-2)}
+.btn--block{width:100%}
+.btn--danger{--btn-fg:var(--danger);--btn-bg:var(--danger-bg);--btn-bd:#F3D2D2}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.45;cursor:not-allowed;box-shadow:none;transform:none;filter:none}
+.iconbtn{width:44px;height:44px;border-radius:12px;border:1px solid var(--line);background:var(--surface);
+  display:inline-grid;place-items:center;cursor:pointer;color:var(--ink-2);flex:none;
+  transition:transform .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease),color .18s var(--ease);
+  touch-action:manipulation}
+.iconbtn svg{width:19px;height:19px}
+.iconbtn:hover{background:var(--surface-2);color:var(--blue-700);transform:translateY(-1px);box-shadow:var(--sh-1)}
+.iconbtn:active{transform:translateY(0) scale(.96)}
+.iconbtn[disabled]{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
+
+/* ---------- Hero ---------- */
+.hero{padding:clamp(28px,5vw,50px) 0 4px}
+.hero__grid{display:grid;gap:24px;grid-template-columns:1fr}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;padding:6px 13px;border-radius:999px;
+  background:#E4EEFC;border:1px solid #CBDFF8;color:var(--navy-800);
+  font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--blue-600);display:block}
+.hero h1{margin-top:16px;font-size:clamp(29px,5.2vw,44px);font-weight:700;color:var(--navy-950)}
+.hero h1 span{background:linear-gradient(100deg,var(--blue-600),var(--sky-400));-webkit-background-clip:text;background-clip:text;color:transparent}
+.lead{margin-top:12px;font-size:clamp(15px,2.1vw,17px);color:var(--ink-2);max-width:60ch}
+.hero__meta{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;
+  background:var(--surface);border:1px solid var(--line);box-shadow:var(--sh-1);
+  font-size:13.5px;font-weight:500;color:var(--ink-2)}
+.chip svg{width:16px;height:16px;color:var(--blue-600);flex:none}
+.chip b{font-weight:700;color:var(--navy-900);font-variant-numeric:tabular-nums}
+.ready{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);
+  box-shadow:var(--sh-1);padding:18px 20px}
+.ready__row{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ready__label{font-size:13px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ready__num{font-size:15px;font-weight:700;color:var(--navy-900);font-variant-numeric:tabular-nums}
+.ready__track{margin-top:14px;height:9px;border-radius:999px;background:var(--line-2);overflow:hidden}
+.ready__fill{height:100%;border-radius:999px;background:linear-gradient(90deg,var(--blue-600),var(--sky-400));width:0;transition:width .5s var(--ease)}
+.ready__hint{margin-top:12px;font-size:13px;color:var(--muted)}
+
+/* ---------- Section + cards ---------- */
+.section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin:42px 0 18px;flex-wrap:wrap}
+.section-head h2{font-size:20px;font-weight:700;color:var(--navy-900)}
+.section-head p{font-size:14px;color:var(--muted);margin-top:4px}
+.grid{display:grid;gap:22px;grid-template-columns:repeat(auto-fit,minmax(288px,1fr))}
+.card{position:relative;display:flex;flex-direction:column;overflow:hidden;
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);box-shadow:var(--sh-1);
+  transition:transform .25s var(--ease),box-shadow .25s var(--ease),border-color .25s var(--ease)}
+.card:hover{transform:translateY(-5px);box-shadow:var(--sh-3);border-color:#C8DCF5}
+.card::before{content:"";position:absolute;inset:0 0 auto;height:5px;background:linear-gradient(90deg,var(--t1),var(--t2))}
+.card__body{padding:26px 24px 0;flex:1}
+.card__top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card__icon{width:58px;height:58px;border-radius:17px;display:grid;place-items:center;flex:none;color:#fff;
+  background:linear-gradient(145deg,var(--t1),var(--t2));box-shadow:0 10px 20px rgba(10,37,81,.18)}
+.card__icon svg{width:29px;height:29px}
+.card__cat{margin-top:22px;font-size:11.5px;font-weight:700;letter-spacing:.16em;color:var(--t2);text-transform:uppercase}
+.card h3{margin-top:7px;font-size:23px;font-weight:700;color:var(--navy-950);letter-spacing:-.015em}
+.card__desc{margin-top:9px;font-size:14.5px;color:var(--muted)}
+.status{display:inline-flex;align-items:center;gap:7px;padding:6px 12px;border-radius:999px;
+  font-size:12.5px;font-weight:600;border:1px solid;white-space:nowrap}
+.status svg{width:14px;height:14px;flex:none}
+.status--on{background:var(--ok-bg);color:var(--ok);border-color:var(--ok-line)}
+.status--off{background:var(--warn-bg);color:var(--warn);border-color:var(--warn-line)}
+.linkbox{display:flex;align-items:center;gap:9px;margin-top:14px;padding:11px 13px;border-radius:var(--r-md);
+  background:var(--surface-2);border:1px dashed var(--line);font-size:13px;color:var(--ink-2);min-height:44px}
+.linkbox svg{width:16px;height:16px;color:var(--muted);flex:none}
+.linkbox span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-family:'IBM Plex Sans',ui-monospace,monospace}
+.linkbox--empty span{font-style:italic;color:var(--muted);font-family:inherit}
+.card__foot{display:flex;gap:10px;padding:20px 24px 24px;margin-top:20px;border-top:1px solid var(--line-2)}
+.card__foot .btn{flex:1;min-width:0}
+
+/* ---------- Panel / footer ---------- */
+.panel{margin:44px 0 0;background:linear-gradient(140deg,var(--navy-900),var(--navy-800) 58%,var(--blue-700));
+  color:#fff;border-radius:var(--r-xl);padding:clamp(24px,4vw,34px);box-shadow:var(--sh-2);
+  display:grid;gap:22px;grid-template-columns:1fr}
+.panel h2{font-size:20px;font-weight:700}
+.panel p{color:#C9DDF7;font-size:14.5px;margin-top:8px;max-width:58ch}
+.panel ol{margin:14px 0 0;padding-left:20px;color:#DCEAFB;font-size:14.5px;display:grid;gap:7px}
+.panel__actions{display:flex;flex-wrap:wrap;gap:10px}
+.panel .btn{--btn-bg:rgba(255,255,255,.1);--btn-fg:#fff;--btn-bd:rgba(255,255,255,.26)}
+.panel .btn:hover{--btn-bg:rgba(255,255,255,.2)}
+.panel .btn--primary{--btn-bg:#fff;--btn-fg:var(--navy-900);--btn-bd:transparent;box-shadow:0 8px 18px rgba(0,0,0,.2)}
+footer{margin-top:44px;padding:26px 0 calc(34px + env(safe-area-inset-bottom));border-top:1px solid var(--line);
+  color:var(--muted);font-size:13px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+footer b{color:var(--ink-2);font-weight:600}
+
+/* ---------- Modal ---------- */
+.scrim{position:fixed;inset:0;z-index:100;background:rgba(6,26,56,.55);backdrop-filter:blur(4px);
+  display:grid;place-items:center;padding:16px;animation:fade .2s var(--ease)}
+.scrim[hidden]{display:none}
+.modal{width:min(660px,100%);max-height:min(88dvh,860px);overflow:auto;background:var(--surface);
+  border-radius:var(--r-xl);box-shadow:var(--sh-3);animation:pop .24s var(--ease)}
+.modal__head{position:sticky;top:0;background:var(--surface);border-bottom:1px solid var(--line);
+  padding:22px 24px;display:flex;align-items:flex-start;justify-content:space-between;gap:14px;z-index:1}
+.modal__head h2{font-size:19px;font-weight:700;color:var(--navy-900)}
+.modal__head p{font-size:13.5px;color:var(--muted);margin-top:5px}
+.modal__body{padding:22px 24px}
+.modal__foot{position:sticky;bottom:0;background:var(--surface);border-top:1px solid var(--line);
+  padding:16px 24px calc(16px + env(safe-area-inset-bottom));display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}
+.field{margin-bottom:22px}
+.field:last-child{margin-bottom:0}
+.field label{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:var(--navy-900);margin-bottom:7px}
+.field label i{width:9px;height:9px;border-radius:3px;display:block;background:var(--t1,var(--blue-600))}
+.field input,.field textarea{width:100%;min-height:48px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);
+  background:var(--surface-2);color:var(--ink);font:inherit;font-size:15px;
+  transition:border-color .18s var(--ease),box-shadow .18s var(--ease),background .18s var(--ease)}
+.field textarea{min-height:130px;resize:vertical;font-family:'IBM Plex Sans',ui-monospace,monospace;font-size:13px;line-height:1.6}
+.field input:focus,.field textarea:focus{outline:none;background:var(--surface);border-color:var(--blue-500);box-shadow:0 0 0 4px rgba(46,134,240,.16)}
+.field input[aria-invalid="true"]{border-color:var(--danger);box-shadow:0 0 0 4px rgba(192,37,37,.12)}
+.help{margin-top:7px;font-size:12.5px;color:var(--muted)}
+.err{display:none;align-items:center;gap:6px;margin-top:7px;font-size:12.5px;font-weight:600;color:var(--danger)}
+.err svg{width:14px;height:14px;flex:none}
+.err.show{display:flex}
+.note{display:flex;gap:11px;padding:14px 16px;border-radius:var(--r-md);background:#EDF4FE;border:1px solid #CFE2FA;
+  color:var(--navy-800);font-size:13.5px;line-height:1.55}
+.note svg{width:18px;height:18px;flex:none;color:var(--blue-600);margin-top:2px}
+.tabs{display:flex;gap:6px;padding:5px;background:var(--surface-2);border:1px solid var(--line);border-radius:14px;margin-bottom:22px}
+.tabs button{flex:1;min-height:40px;border:0;border-radius:10px;background:transparent;color:var(--muted);
+  font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.18s var(--ease)}
+.tabs button[aria-selected="true"]{background:var(--surface);color:var(--navy-900);box-shadow:var(--sh-1)}
+
+/* ---------- Toast ---------- */
+.toast{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom));transform:translate(-50%,20px);
+  z-index:200;display:flex;align-items:center;gap:10px;padding:13px 20px;border-radius:14px;
+  background:var(--navy-900);color:#fff;font-size:14.5px;font-weight:600;box-shadow:var(--sh-3);
+  opacity:0;pointer-events:none;transition:opacity .22s var(--ease),transform .22s var(--ease);max-width:calc(100vw - 32px)}
+.toast svg{width:18px;height:18px;flex:none;color:#7FE0AE}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@keyframes fade{from{opacity:0}to{opacity:1}}
+@keyframes pop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}
+
+@media (min-width:900px){
+  .hero__grid{grid-template-columns:1.4fr .6fr;align-items:end}
+  .panel{grid-template-columns:1.5fr auto;align-items:center}
+  .panel__actions{justify-content:flex-end}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important}
+  .card:hover,.btn:hover,.iconbtn:hover{transform:none}
+}
+@media print{
+  body{background:#fff}
+  .topbar,.card__foot,.panel,.toast,.scrim,.hero__meta,.skip{display:none !important}
+  .card{break-inside:avoid;box-shadow:none;border-color:#94A3B8}
+  .linkbox span{white-space:normal;word-break:break-all}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<header class="topbar">
+  <div class="wrap topbar__in">
+    <div class="brand">
+      <span class="brand__mark" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+      </span>
+      <span>
+        <span class="brand__name">TENNECO</span>
+        <span class="brand__sub">Chonburi Plant · GEMBA Center</span>
+      </span>
+    </div>
+    <span class="topbar__spacer"></span>
+    <div class="topbar__actions">
+      <button class="btn btn--soft hide-sm" type="button" id="btnPrint">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
+        พิมพ์
+      </button>
+      <button class="btn btn--primary" type="button" id="btnSettings">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        จัดการลิงก์
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <section class="wrap hero">
+    <div class="hero__grid">
+      <div>
+        <span class="eyebrow"><i></i> Gemba Walk System</span>
+        <h1>ศูนย์รวมลิงก์งาน <span>GEMBA</span><br>ครบทุกรายการในหน้าเดียว</h1>
+        <p class="lead">รวมลิงก์ฟอร์มตรวจ GEMBA ทั้ง 3 รายการของโรงงาน TENNECO ชลบุรี เปิดใช้งานได้ทันทีจากมือถือ แท็บเล็ต หรือคอมพิวเตอร์หน้างาน</p>
+        <div class="hero__meta">
+          <span class="chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+            <b>3</b> รายการ
+          </span>
+          <span class="chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+            อัปเดตล่าสุด <b id="metaUpdated">—</b>
+          </span>
+          <span class="chip">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/></svg>
+            ใช้ภายในองค์กร
+          </span>
+        </div>
+      </div>
+      <div class="ready" aria-live="polite">
+        <div class="ready__row">
+          <span class="ready__label">สถานะความพร้อม</span>
+          <span class="ready__num"><span id="readyCount">0</span> / 3</span>
+        </div>
+        <div class="ready__track" role="img" aria-label="ความคืบหน้าการใส่ลิงก์" id="readyTrack">
+          <div class="ready__fill" id="readyFill"></div>
+        </div>
+        <p class="ready__hint" id="readyHint">ยังไม่ได้ใส่ลิงก์ — กดปุ่ม “จัดการลิงก์” เพื่อเริ่มต้น</p>
+      </div>
+    </div>
+
+    <div class="section-head">
+      <div>
+        <h2>รายการ GEMBA</h2>
+        <p>เลือกหัวข้อที่ต้องการตรวจ แล้วกด “เปิดฟอร์ม”</p>
+      </div>
+    </div>
+
+    <div class="grid" id="cardGrid"></div>
+
+    <section class="panel">
+      <div>
+        <h2>วิธีใช้งาน</h2>
+        <p>ลิงก์ที่บันทึกจะถูกเก็บไว้ในเบราว์เซอร์ของเครื่องนี้ ใช้ปุ่ม “สำรอง / กู้คืน” เพื่อคัดลอกไปตั้งค่าที่เครื่องอื่นได้</p>
+        <ol>
+          <li>กด <b>จัดการลิงก์</b> แล้ววางลิงก์ของแต่ละรายการ (Google Form, SharePoint, Power Apps ฯลฯ)</li>
+          <li>กด <b>บันทึก</b> — การ์ดจะเปลี่ยนเป็นสถานะ “พร้อมใช้งาน” ทันที</li>
+          <li>ส่งหน้านี้ให้ทีม หรือกด <b>พิมพ์</b> เพื่อติดบอร์ดหน้างาน</li>
+        </ol>
+      </div>
+      <div class="panel__actions">
+        <button class="btn btn--primary" type="button" id="btnCopyAll">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          คัดลอกลิงก์ทั้งหมด
+        </button>
+        <button class="btn" type="button" id="btnBackup">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+          สำรอง / กู้คืน
+        </button>
+      </div>
+    </section>
+
+    <footer>
+      <span><b>TENNECO Chonburi</b> · GEMBA Center</span>
+      <span id="footDate">—</span>
+    </footer>
+  </section>
+</main>
+
+<!-- ============ Modal: จัดการลิงก์ ============ -->
+<div class="scrim" id="scrim" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" id="modal">
+    <div class="modal__head">
+      <div>
+        <h2 id="modalTitle">จัดการลิงก์ GEMBA</h2>
+        <p id="modalDesc">วางลิงก์ของแต่ละรายการ แล้วกดบันทึก</p>
+      </div>
+      <button class="iconbtn" type="button" id="btnClose" aria-label="ปิดหน้าต่าง">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="modal__body">
+      <div class="tabs" role="tablist" aria-label="โหมดการจัดการ">
+        <button type="button" role="tab" id="tabLinks" aria-selected="true" aria-controls="paneLinks">ใส่ลิงก์</button>
+        <button type="button" role="tab" id="tabBackup" aria-selected="false" aria-controls="paneBackup">สำรอง / กู้คืน</button>
+      </div>
+
+      <div id="paneLinks" role="tabpanel" aria-labelledby="tabLinks">
+        <form id="linkForm" novalidate></form>
+        <div class="note" style="margin-top:4px">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 16v-5M12 8h.01"/></svg>
+          <span>ไม่ต้องพิมพ์ <b>https://</b> ก็ได้ ระบบจะเติมให้อัตโนมัติ · ลิงก์จะถูกบันทึกไว้ในเบราว์เซอร์เครื่องนี้เท่านั้น</span>
+        </div>
+      </div>
+
+      <div id="paneBackup" role="tabpanel" aria-labelledby="tabBackup" hidden>
+        <div class="field">
+          <label for="backupBox">ข้อมูลสำรอง (JSON)</label>
+          <textarea id="backupBox" spellcheck="false" aria-describedby="backupHelp"></textarea>
+          <p class="help" id="backupHelp">คัดลอกข้อความนี้ไปเก็บไว้ หรือวางข้อมูลสำรองจากเครื่องอื่นแล้วกด “กู้คืนข้อมูล”</p>
+        </div>
+        <div class="panel__actions" style="gap:10px">
+          <button class="btn btn--soft" type="button" id="btnCopyBackup">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            คัดลอก
+          </button>
+          <button class="btn btn--soft" type="button" id="btnRestore">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+            กู้คืนข้อมูล
+          </button>
+          <button class="btn btn--danger" type="button" id="btnClear">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
+            ล้างลิงก์ทั้งหมด
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal__foot">
+      <button class="btn btn--soft" type="button" id="btnCancel">ยกเลิก</button>
+      <button class="btn btn--primary" type="button" id="btnSave">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+        บันทึกลิงก์
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* =========================================================
+     1) ตั้งค่ารายการ GEMBA
+     ถ้าต้องการ "ฝัง" ลิงก์ถาวรลงไฟล์เลย ใส่ที่ช่อง url: ''
+     (ค่าที่บันทึกผ่านหน้าเว็บจะถูกใช้ก่อนเสมอ)
+     ========================================================= */
+  var ITEMS = [
+    {
+      id: 'qc', cat: 'Quality', title: 'GEMBA QC',
+      desc: 'ตรวจติดตามคุณภาพหน้างาน จุดเสี่ยงของเสีย และการควบคุมกระบวนการผลิต',
+      url: '', t1: '#38BDF8', t2: '#0369A1',
+      icon: '<path d="M9 4H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-2"/><rect x="9" y="2" width="6" height="4" rx="1"/><path d="m9 14 2 2 4-4"/>'
+    },
+    {
+      id: 'safety', cat: 'Safety', title: 'GEMBA SAFETY',
+      desc: 'ตรวจความปลอดภัยพื้นที่ปฏิบัติงาน สภาพไม่ปลอดภัย และการใช้ PPE',
+      url: '', t1: '#3B82F6', t2: '#1D4ED8',
+      icon: '<path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/>'
+    },
+    {
+      id: 'lsw5s', cat: 'LSW & 5S', title: 'GEMBA LSW&amp;5S',
+      desc: 'Leader Standard Work และการตรวจ 5S ความเป็นระเบียบของพื้นที่ทำงาน',
+      url: '', t1: '#4F79E8', t2: '#1E3A8A',
+      icon: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="m14 17.5 2.5 2.5 4.5-4.5"/>'
+    }
+  ];
+
+  var KEY = 'tenneco-gemba-links-v1';
+  var svgAttrs = 'viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"';
+  var ICON = {
+    open: '<path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>',
+    copy: '<rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/>',
+    edit: '<path d="M12 20h9"/><path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>',
+    link: '<path d="M10 13a5 5 0 0 0 7.5.5l3-3A5 5 0 0 0 13.5 3.5L12 5"/><path d="M14 11a5 5 0 0 0-7.5-.5l-3 3A5 5 0 0 0 10.5 20.5L12 19"/>',
+    check: '<circle cx="12" cy="12" r="9"/><path d="m8.5 12.5 2.5 2.5 4.5-5"/>',
+    warn: '<path d="M10.3 3.9 1.9 18a2 2 0 0 0 1.7 3h16.8a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/>'
+  };
+
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var state = { links: {}, updated: '' };
+
+  /* ---------- storage ---------- */
+  function load() {
+    var seed = {};
+    ITEMS.forEach(function (it) { seed[it.id] = it.url || ''; });
+    state.links = seed;
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (raw) {
+        var data = JSON.parse(raw);
+        if (data && typeof data === 'object') {
+          ITEMS.forEach(function (it) {
+            var saved = data.links && data.links[it.id];
+            if (typeof saved === 'string' && isValid(saved)) state.links[it.id] = normalize(saved);
+          });
+          state.updated = typeof data.updated === 'string' ? data.updated : '';
+        }
+      }
+    } catch (e) { /* โหมดส่วนตัว / ปิดคุกกี้ — ใช้ค่าเริ่มต้น */ }
+  }
+  function save() {
+    state.updated = new Date().toISOString();
+    try {
+      localStorage.setItem(KEY, JSON.stringify({ links: state.links, updated: state.updated }));
+      return true;
+    } catch (e) { return false; }
+  }
+
+  /* ---------- helpers ---------- */
+  function normalize(v) {
+    v = (v || '').trim();
+    if (!v) return '';
+    if (!/^[a-z][a-z0-9+.-]*:\/\//i.test(v)) v = 'https://' + v;
+    return v;
+  }
+  function isValid(v) {
+    try {
+      var u = new URL(normalize(v));
+      return (u.protocol === 'http:' || u.protocol === 'https:') && !!u.hostname && u.hostname.indexOf('.') > 0;
+    } catch (e) { return false; }
+  }
+  function pretty(v) {
+    try { var u = new URL(v); return u.hostname.replace(/^www\./, '') + (u.pathname !== '/' ? u.pathname : ''); }
+    catch (e) { return v; }
+  }
+  function fmtDate(iso) {
+    if (!iso) return '—';
+    try {
+      return new Date(iso).toLocaleDateString('th-TH', { day: '2-digit', month: 'short', year: 'numeric' }) +
+             ' · ' + new Date(iso).toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+    } catch (e) { return '—'; }
+  }
+  function svg(path, cls) { return '<svg ' + svgAttrs + (cls ? ' class="' + cls + '"' : '') + '>' + path + '</svg>'; }
+  function esc(v) {
+    return String(v == null ? '' : v)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function toast(msg) {
+    var el = $('#toast');
+    el.innerHTML = svg(ICON.check) + '<span>' + msg + '</span>';
+    el.classList.add('show');
+    clearTimeout(toast._t);
+    toast._t = setTimeout(function () { el.classList.remove('show'); }, 3200);
+  }
+  function copy(text, msg) {
+    var done = function () { toast(msg || 'คัดลอกแล้ว'); };
+    if (navigator.clipboard && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(done, function () { fallback(text, done); });
+    } else { fallback(text, done); }
+  }
+  function fallback(text, done) {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); done(); } catch (e) { toast('คัดลอกไม่สำเร็จ — กรุณาคัดลอกเอง'); }
+    document.body.removeChild(ta);
+  }
+
+  /* ---------- render ---------- */
+  function render() {
+    var grid = $('#cardGrid');
+    grid.innerHTML = ITEMS.map(function (it) {
+      var url = state.links[it.id];
+      var on = !!url;
+      return '' +
+      '<article class="card" style="--t1:' + it.t1 + ';--t2:' + it.t2 + '">' +
+        '<div class="card__body">' +
+          '<div class="card__top">' +
+            '<span class="card__icon" aria-hidden="true">' + svg(it.icon) + '</span>' +
+            '<span class="status ' + (on ? 'status--on' : 'status--off') + '">' +
+              svg(on ? ICON.check : ICON.warn) + (on ? 'พร้อมใช้งาน' : 'ยังไม่ได้ใส่ลิงก์') +
+            '</span>' +
+          '</div>' +
+          '<p class="card__cat">' + it.cat + '</p>' +
+          '<h3>' + it.title + '</h3>' +
+          '<p class="card__desc">' + it.desc + '</p>' +
+          '<div class="linkbox' + (on ? '' : ' linkbox--empty') + '">' + svg(ICON.link) +
+            '<span title="' + (on ? esc(url) : '') + '">' + (on ? esc(pretty(url)) : 'กด “จัดการลิงก์” เพื่อเพิ่มลิงก์') + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<div class="card__foot">' +
+          (on
+            ? '<a class="btn btn--primary" href="' + esc(url) + '" target="_blank" rel="noopener noreferrer">' + svg(ICON.open) + 'เปิดฟอร์ม</a>'
+            : '<button class="btn btn--primary" type="button" disabled>' + svg(ICON.open) + 'เปิดฟอร์ม</button>') +
+          '<button class="iconbtn" type="button" data-copy="' + it.id + '" ' + (on ? '' : 'disabled ') + 'aria-label="คัดลอกลิงก์ ' + it.title + '">' + svg(ICON.copy) + '</button>' +
+          '<button class="iconbtn" type="button" data-edit="' + it.id + '" aria-label="แก้ไขลิงก์ ' + it.title + '">' + svg(ICON.edit) + '</button>' +
+        '</div>' +
+      '</article>';
+    }).join('');
+
+    var ready = ITEMS.filter(function (it) { return !!state.links[it.id]; }).length;
+    $('#readyCount').textContent = ready;
+    $('#readyFill').style.width = (ready / ITEMS.length * 100) + '%';
+    $('#readyTrack').setAttribute('aria-label', 'ใส่ลิงก์แล้ว ' + ready + ' จาก ' + ITEMS.length + ' รายการ');
+    $('#readyHint').textContent = ready === ITEMS.length
+      ? 'ครบทุกรายการ พร้อมใช้งานหน้างานแล้ว'
+      : (ready === 0 ? 'ยังไม่ได้ใส่ลิงก์ — กดปุ่ม “จัดการลิงก์” เพื่อเริ่มต้น'
+                     : 'เหลืออีก ' + (ITEMS.length - ready) + ' รายการที่ยังไม่ได้ใส่ลิงก์');
+    $('#metaUpdated').textContent = fmtDate(state.updated);
+  }
+
+  /* ---------- modal ---------- */
+  var lastFocus = null;
+  function buildForm() {
+    $('#linkForm').innerHTML = ITEMS.map(function (it) {
+      return '' +
+      '<div class="field" style="--t1:' + it.t1 + '">' +
+        '<label for="in-' + it.id + '"><i></i>' + it.title + '</label>' +
+        '<input id="in-' + it.id + '" name="' + it.id + '" type="url" inputmode="url" spellcheck="false" ' +
+          'autocomplete="off" placeholder="เช่น forms.office.com/r/xxxx" ' +
+          'aria-describedby="help-' + it.id + ' err-' + it.id + '" value="' + esc(state.links[it.id] || '') + '">' +
+        '<p class="help" id="help-' + it.id + '">' + it.cat + ' — วางลิงก์ฟอร์มหรือหน้าเว็บที่ต้องการเปิด (เว้นว่างได้ถ้ายังไม่มี)</p>' +
+        '<p class="err" id="err-' + it.id + '" role="alert">' + svg(ICON.warn) + 'รูปแบบลิงก์ไม่ถูกต้อง ตัวอย่าง: forms.office.com/r/xxxx</p>' +
+      '</div>';
+    }).join('');
+
+    ITEMS.forEach(function (it) {
+      var input = $('#in-' + it.id);
+      input.addEventListener('blur', function () { validateField(it.id); });
+      input.addEventListener('input', function () {
+        if (input.getAttribute('aria-invalid') === 'true') validateField(it.id);
+      });
+    });
+  }
+  function validateField(id) {
+    var input = $('#in-' + id), err = $('#err-' + id);
+    var v = input.value.trim();
+    var bad = v !== '' && !isValid(v);
+    input.setAttribute('aria-invalid', bad ? 'true' : 'false');
+    err.classList.toggle('show', bad);
+    return !bad;
+  }
+  function isDirty() {
+    return ITEMS.some(function (it) {
+      return normalize($('#in-' + it.id).value) !== (state.links[it.id] || '');
+    });
+  }
+  function openModal(focusId) {
+    lastFocus = document.activeElement;
+    buildForm();
+    $('#backupBox').value = JSON.stringify({ links: state.links, updated: state.updated }, null, 2);
+    switchTab('links');
+    $('#scrim').hidden = false;
+    document.body.style.overflow = 'hidden';
+    var target = focusId ? $('#in-' + focusId) : $('#in-' + ITEMS[0].id);
+    setTimeout(function () { if (target) { target.focus(); target.select(); } }, 40);
+  }
+  function closeModal(force) {
+    if (!force && isDirty() && !confirm('ยังไม่ได้บันทึกการแก้ไข ต้องการปิดหน้าต่างหรือไม่?')) return;
+    $('#scrim').hidden = true;
+    document.body.style.overflow = '';
+    if (lastFocus && lastFocus.focus) lastFocus.focus();
+  }
+  function switchTab(which) {
+    var links = which === 'links';
+    $('#tabLinks').setAttribute('aria-selected', String(links));
+    $('#tabBackup').setAttribute('aria-selected', String(!links));
+    $('#paneLinks').hidden = !links;
+    $('#paneBackup').hidden = links;
+    $('#btnSave').style.display = links ? '' : 'none';
+    $('#modalDesc').textContent = links ? 'วางลิงก์ของแต่ละรายการ แล้วกดบันทึก' : 'คัดลอกเก็บไว้ หรือกู้คืนจากเครื่องอื่น';
+  }
+
+  /* ---------- events ---------- */
+  function bind() {
+    $('#btnSettings').addEventListener('click', function () { openModal(); });
+    $('#btnClose').addEventListener('click', function () { closeModal(); });
+    $('#btnCancel').addEventListener('click', function () { closeModal(); });
+    $('#btnPrint').addEventListener('click', function () { window.print(); });
+    $('#tabLinks').addEventListener('click', function () { switchTab('links'); });
+    $('#tabBackup').addEventListener('click', function () { switchTab('backup'); });
+
+    $('#scrim').addEventListener('mousedown', function (e) { if (e.target === $('#scrim')) closeModal(); });
+    document.addEventListener('keydown', function (e) {
+      if ($('#scrim').hidden) return;
+      if (e.key === 'Escape') { e.preventDefault(); closeModal(); }
+      if (e.key === 'Tab') trapFocus(e);
+    });
+
+    $('#btnSave').addEventListener('click', function () {
+      var firstBad = null;
+      ITEMS.forEach(function (it) { if (!validateField(it.id) && !firstBad) firstBad = it.id; });
+      if (firstBad) { $('#in-' + firstBad).focus(); toast('ตรวจสอบรูปแบบลิงก์อีกครั้ง'); return; }
+      ITEMS.forEach(function (it) { state.links[it.id] = normalize($('#in-' + it.id).value); });
+      var ok = save();
+      render();
+      closeModal(true);
+      toast(ok ? 'บันทึกลิงก์เรียบร้อย' : 'บันทึกในหน้านี้แล้ว (เบราว์เซอร์ไม่อนุญาตให้จำถาวร)');
+    });
+
+    $('#btnClear').addEventListener('click', function () {
+      if (!confirm('ต้องการล้างลิงก์ทั้ง 3 รายการหรือไม่?')) return;
+      ITEMS.forEach(function (it) { state.links[it.id] = ''; });
+      save(); render(); buildForm();
+      $('#backupBox').value = JSON.stringify({ links: state.links, updated: state.updated }, null, 2);
+      toast('ล้างลิงก์ทั้งหมดแล้ว');
+    });
+
+    $('#btnCopyBackup').addEventListener('click', function () { copy($('#backupBox').value, 'คัดลอกข้อมูลสำรองแล้ว'); });
+
+    $('#btnRestore').addEventListener('click', function () {
+      var data;
+      try { data = JSON.parse($('#backupBox').value); }
+      catch (e) { toast('ข้อมูลสำรองไม่ถูกต้อง'); return; }
+      if (!data || typeof data !== 'object' || !data.links) { toast('ข้อมูลสำรองไม่ถูกต้อง'); return; }
+      var skipped = 0;
+      ITEMS.forEach(function (it) {
+        var v = data.links[it.id];
+        if (typeof v !== 'string') return;
+        if (v.trim() === '') { state.links[it.id] = ''; return; }
+        if (isValid(v)) state.links[it.id] = normalize(v); else skipped++;
+      });
+      save(); render(); buildForm(); switchTab('links');
+      toast(skipped ? 'กู้คืนแล้ว — ข้าม ' + skipped + ' ลิงก์ที่รูปแบบไม่ถูกต้อง' : 'กู้คืนข้อมูลเรียบร้อย');
+    });
+
+    $('#btnBackup').addEventListener('click', function () { openModal(); switchTab('backup'); });
+
+    $('#btnCopyAll').addEventListener('click', function () {
+      var lines = ['GEMBA — TENNECO Chonburi'];
+      ITEMS.forEach(function (it) {
+        var t = it.title.replace(/&amp;/g, '&');
+        lines.push(t + ': ' + (state.links[it.id] || '(ยังไม่ได้ใส่ลิงก์)'));
+      });
+      copy(lines.join('\n'), 'คัดลอกลิงก์ทั้งหมดแล้ว');
+    });
+
+    $('#cardGrid').addEventListener('click', function (e) {
+      var c = e.target.closest('[data-copy]');
+      if (c) { copy(state.links[c.getAttribute('data-copy')], 'คัดลอกลิงก์แล้ว'); return; }
+      var ed = e.target.closest('[data-edit]');
+      if (ed) openModal(ed.getAttribute('data-edit'));
+    });
+  }
+  function trapFocus(e) {
+    var f = $('#modal').querySelectorAll('button, [href], input, textarea, select, [tabindex]:not([tabindex="-1"])');
+    var list = Array.prototype.filter.call(f, function (el) { return el.offsetParent !== null && !el.disabled; });
+    if (!list.length) return;
+    var first = list[0], last = list[list.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+  }
+
+  /* ---------- init ---------- */
+  load();
+  render();
+  bind();
+  try {
+    $('#footDate').textContent = new Date().toLocaleDateString('th-TH', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  } catch (e) { $('#footDate').textContent = ''; }
+})();
+</script>
+</body>
+</html>
