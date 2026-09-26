@@ -11,7 +11,8 @@
 
 ## การใช้งาน
 
-เปิดไฟล์ `index.html` ได้เลย — ไฟล์เดียวจบ ไม่ต้องติดตั้งอะไร ไม่ต้องมีเซิร์ฟเวอร์
+เปิดไฟล์ `index.html` ได้เลย ไม่ต้องติดตั้งอะไร ไม่ต้องมีเซิร์ฟเวอร์
+(ต้องมีโฟลเดอร์ `assets/` ที่เก็บโลโก้ TENNECO อยู่ข้างกันด้วย)
 
 1. กด **จัดการลิงก์** แล้ววางลิงก์ของแต่ละรายการ (Google Form, Microsoft Forms, SharePoint, Power Apps ฯลฯ)
 2. กด **บันทึก** — การ์ดจะเปลี่ยนเป็นสถานะ "พร้อมใช้งาน" ทันที
@@ -46,8 +47,9 @@ Settings → Pages → Source เลือก **Deploy from a branch** → Branc
 
 ## รายละเอียดทางเทคนิค
 
-- HTML/CSS/JS ล้วน ไฟล์เดียว ไม่มี dependency และไม่มี build step
-- ธีมน้ำเงิน–ขาว, ฟอนต์ IBM Plex Sans Thai (โหลดจาก Google Fonts พร้อม fallback สำหรับใช้งานออฟไลน์)
-- Responsive ทดสอบที่ 320 / 375 / 768 / 1280 px
+- HTML/CSS/JS ล้วน ไม่มี dependency และไม่มี build step
+- ธีมน้ำเงินกรมท่า–ขาว ใช้สีแบรนด์ `#233D93` จากโลโก้ TENNECO (`assets/tenneco-logo.png` พื้นโปร่งใส ใช้ได้ทั้งบนพื้นขาวและกลับเป็นสีขาวบนพื้นน้ำเงิน)
+- ฟอนต์ IBM Plex Sans Thai (โหลดจาก Google Fonts พร้อม fallback สำหรับใช้งานออฟไลน์)
+- Responsive 3 รูปแบบ: มือถือ (การ์ดแบบกะทัดรัด, หน้าต่างจัดการลิงก์เป็น bottom sheet) · แท็บเล็ต (การ์ดแนวนอน) · คอมพิวเตอร์ (การ์ด 3 คอลัมน์) — ทดสอบที่ 320 / 375 / 768 / 1366 px
 - ผ่าน WCAG AA (contrast ≥ 4.5:1), touch target ≥ 44px, รองรับคีย์บอร์ด, screen reader และ `prefers-reduced-motion`
 - รับเฉพาะลิงก์ `http` / `https` เท่านั้น และ escape ข้อมูลก่อน render ทุกจุด
