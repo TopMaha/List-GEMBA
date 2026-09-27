@@ -81,6 +81,24 @@ img{max-width:100%}
   .topbar .only-md{display:inline-flex}
 }
 
+/* ---------- Page switch: in the top bar ≥ 1024, top of the hero below that ---------- */
+.pagenav{display:flex;gap:4px;padding:4px;border-radius:14px;background:var(--surface-2);border:1px solid var(--line)}
+.pagenav a{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;border-radius:10px;
+  color:var(--muted);font-size:14.5px;font-weight:600;text-decoration:none;white-space:nowrap;
+  transition:background-color .18s var(--ease),color .18s var(--ease),box-shadow .18s var(--ease);
+  touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.pagenav svg{width:18px;height:18px;flex:none}
+.pagenav a[aria-current="page"]{background:var(--surface);color:var(--brand);box-shadow:var(--sh-1)}
+.pagenav--bar{display:none}
+.pagenav--hero{background:rgba(255,255,255,.08);border-color:var(--on-navy-line)}
+.pagenav--hero a{flex:1;min-width:0;padding:0 10px;color:var(--on-navy-2)}
+.pagenav--hero a[aria-current="page"]{background:#fff;color:var(--brand);box-shadow:none}
+@media (hover:hover){
+  .pagenav--bar a:not([aria-current]):hover{color:var(--brand);background:var(--brand-50)}
+  .pagenav--hero a:not([aria-current]):hover{color:#fff;background:rgba(255,255,255,.1)}
+}
+@media (min-width:1024px){.pagenav--bar{display:flex}.pagenav--hero{display:none}}
+
 /* ---------- Buttons ---------- */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;
   min-height:var(--tap);padding:0 18px;border-radius:12px;border:1px solid var(--line);
@@ -297,7 +315,7 @@ img{max-width:100%}
 @media print{
   body{background:#fff}
   .topbar{position:static;box-shadow:none;border:0}
-  .topbar__actions,.card__foot,.toast,.scrim,.hero__meta,.hero__stripes,.eyebrow,.ready,.skip{display:none !important}
+  .topbar__actions,.pagenav,.card__foot,.toast,.scrim,.hero__meta,.hero__stripes,.eyebrow,.ready,.skip{display:none !important}
   .hero{background:none;color:var(--ink)}
   .hero h1{color:var(--navy-900)}
   .hero h1 span{color:var(--brand)}
@@ -324,6 +342,16 @@ img{max-width:100%}
       </span>
     </div>
     <span class="topbar__spacer"></span>
+    <nav class="pagenav pagenav--bar" aria-label="เมนูหลัก">
+      <a href="index.html" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        ลิงก์ GEMBA
+      </a>
+      <a href="dashboard.html">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15v2M11 11v6M15 13v4M19 7v10"/></svg>
+        ภาพรวม Audit
+      </a>
+    </nav>
     <div class="topbar__actions">
       <button class="btn btn--soft only-md" type="button" id="btnPrint">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9V2h12v7M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><path d="M6 14h12v8H6z"/></svg>
@@ -341,6 +369,16 @@ img{max-width:100%}
   <section class="hero" aria-labelledby="heroTitle">
     <div class="hero__stripes" aria-hidden="true"><i></i><i></i><i></i></div>
     <div class="wrap hero__in">
+      <nav class="pagenav pagenav--hero" aria-label="เมนูหลัก">
+        <a href="index.html" aria-current="page">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          ลิงก์ GEMBA
+        </a>
+        <a href="dashboard.html">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 3v18h18"/><path d="M7 15v2M11 11v6M15 13v4M19 7v10"/></svg>
+          ภาพรวม Audit
+        </a>
+      </nav>
       <div>
         <span class="eyebrow"><i></i> Gemba Walk System</span>
         <h1 id="heroTitle">ศูนย์รวมลิงก์งาน <span>GEMBA</span><br>ครบทุกรายการในหน้าเดียว</h1>
