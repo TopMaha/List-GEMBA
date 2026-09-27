@@ -221,28 +221,6 @@ img{max-width:100%}
 }
 .grid.is-entering .card{animation:rise .42s var(--ease) both;animation-delay:calc(var(--i,0) * 60ms)}
 
-/* ---------- How-to ---------- */
-.howto{margin-top:28px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-xl);
-  box-shadow:var(--sh-1);padding:22px 18px}
-.howto__top{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px}
-.howto h2{font-size:20px;font-weight:700;color:var(--navy-900)}
-.howto__top p{margin-top:4px;font-size:14.5px;color:var(--muted);max-width:60ch}
-.howto__actions{display:flex;flex-wrap:wrap;gap:10px;width:100%}
-.howto__actions .btn{flex:1 1 200px}
-.steps{list-style:none;margin:20px 0 0;padding:0;display:grid;gap:10px;counter-reset:step}
-.steps li{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;border-radius:var(--r-md);
-  background:var(--surface-2);border:1px solid var(--line-2)}
-.steps__n{width:32px;height:32px;border-radius:10px;flex:none;display:grid;place-items:center;
-  background:var(--brand);color:#fff;font-weight:700;font-size:15px;font-variant-numeric:tabular-nums}
-.steps b{display:block;font-size:15px;color:var(--navy-900)}
-.steps p{margin-top:2px;font-size:14px;color:var(--muted)}
-@media (min-width:768px){
-  .howto{margin-top:36px;padding:28px 30px}
-  .howto__actions{width:auto}
-  .howto__actions .btn{flex:none}
-  .steps{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-}
-
 /* ---------- Footer (navy band, reversed logo) ---------- */
 .foot{margin-top:40px;background:var(--navy-900);color:var(--on-navy-2);font-size:13.5px}
 .foot__in{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 20px;
@@ -319,7 +297,7 @@ img{max-width:100%}
 @media print{
   body{background:#fff}
   .topbar{position:static;box-shadow:none;border:0}
-  .topbar__actions,.card__foot,.howto,.toast,.scrim,.hero__meta,.hero__stripes,.eyebrow,.ready,.skip{display:none !important}
+  .topbar__actions,.card__foot,.toast,.scrim,.hero__meta,.hero__stripes,.eyebrow,.ready,.skip{display:none !important}
   .hero{background:none;color:var(--ink)}
   .hero h1{color:var(--navy-900)}
   .hero h1 span{color:var(--brand)}
@@ -404,30 +382,6 @@ img{max-width:100%}
         </div>
       </div>
       <div class="grid" id="cardGrid"></div>
-    </section>
-
-    <section class="howto" aria-labelledby="howtoTitle">
-      <div class="howto__top">
-        <div>
-          <h2 id="howtoTitle">วิธีใช้งาน</h2>
-          <p>ลิงก์ที่บันทึกจะเก็บไว้ในเบราว์เซอร์ของเครื่องนี้ ใช้ปุ่ม “สำรอง / กู้คืน” เพื่อคัดลอกไปตั้งค่าที่เครื่องอื่นได้</p>
-        </div>
-        <div class="howto__actions">
-          <button class="btn btn--primary" type="button" id="btnCopyAll">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-            คัดลอกลิงก์ทั้งหมด
-          </button>
-          <button class="btn" type="button" id="btnBackup">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
-            สำรอง / กู้คืน
-          </button>
-        </div>
-      </div>
-      <ol class="steps">
-        <li><span class="steps__n" aria-hidden="true">1</span><div><b>จัดการลิงก์</b><p>วางลิงก์ของแต่ละรายการ (Google Form, SharePoint, Power Apps ฯลฯ)</p></div></li>
-        <li><span class="steps__n" aria-hidden="true">2</span><div><b>บันทึก</b><p>การ์ดจะเปลี่ยนเป็นสถานะ “พร้อมใช้งาน” ทันที</p></div></li>
-        <li><span class="steps__n" aria-hidden="true">3</span><div><b>แชร์หรือพิมพ์</b><p>ส่งหน้านี้ให้ทีม หรือกดพิมพ์เพื่อติดบอร์ดหน้างาน</p></div></li>
-      </ol>
     </section>
   </div>
 </main>
@@ -783,17 +737,6 @@ img{max-width:100%}
       });
       save(); render(); buildForm(); switchTab('links');
       toast(skipped ? 'กู้คืนแล้ว — ข้าม ' + skipped + ' ลิงก์ที่รูปแบบไม่ถูกต้อง' : 'กู้คืนข้อมูลเรียบร้อย');
-    });
-
-    $('#btnBackup').addEventListener('click', function () { openModal(); switchTab('backup'); });
-
-    $('#btnCopyAll').addEventListener('click', function () {
-      var lines = ['GEMBA — TENNECO Chonburi'];
-      ITEMS.forEach(function (it) {
-        var t = it.title.replace(/&amp;/g, '&');
-        lines.push(t + ': ' + (state.links[it.id] || '(ยังไม่ได้ใส่ลิงก์)'));
-      });
-      copy(lines.join('\n'), 'คัดลอกลิงก์ทั้งหมดแล้ว');
     });
 
     $('#cardGrid').addEventListener('click', function (e) {
