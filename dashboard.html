@@ -516,7 +516,7 @@ svg{flex:none}
     {
       id: 'safety', tag: 'SAFETY', cat: 'Safety', title: 'GEMBA SAFETY',
       url: APP_ORIGIN + 'Gemba-Safety/', key: 'safety.db.v1',
-      session: 'gemba.session', sessionId: 'manager_id', people: 'managers', admin: 'gemba.admin.session',
+      session: 'safety.session', sessionId: 'manager_id', people: 'managers', admin: 'safety.admin.session',
       t1: '#4B7BEC', t2: '#1E3FA8',
       icon: '<path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/>'
     },
@@ -528,8 +528,10 @@ svg{flex:none}
       icon: '<rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><path d="m14 17.5 2.5 2.5 4.5-4.5"/>'
     }
   ];
-  var KEYS = SOURCES.map(function (s) { return s.key; })
-    .concat(['qc.session', 'qc.admin', 'gemba.session', 'gemba.admin.session']);
+  var KEYS = [];
+  SOURCES.forEach(function (s) {
+    [s.key, s.session, s.admin].forEach(function (k) { if (KEYS.indexOf(k) < 0) KEYS.push(k); });
+  });
   var PREF_KEY = 'tenneco-gemba-dash-v1';
   var PAGE = 10;
   var OTHER = 'อื่น ๆ';
@@ -632,7 +634,7 @@ svg{flex:none}
 
   /* ---------- สิทธิ์: ใช้ด่านเดียวกับหน้าแดชบอร์ดของแต่ละแอป
        (!admin && session && !session.dashboard_enabled) → ไม่ให้เห็นภาพรวม
-       ค่าสิทธิ์ล่าสุดอ่านจากทะเบียนผู้ใช้ของแอปนั้นเอง เพราะ gemba.session ใช้ร่วมกันสองแอป ---------- */
+       ค่าสิทธิ์ล่าสุดอ่านจากทะเบียนผู้ใช้ของแอปนั้นเอง (Admin แก้แล้วมีผลทันทีโดยไม่ต้องรอเซสชันอัปเดต) ---------- */
   function access(src, db) {
     var session = readJSON(src.session);
     var admin = readJSON(src.admin);

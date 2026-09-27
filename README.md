@@ -26,7 +26,7 @@
 | ระบบ | คีย์ที่อ่าน | ต้องตรงกับ |
 |---|---|---|
 | GEMBA QC | `qc.db.v2` · `qc.session` · `qc.admin` | `src/lib/db.ts` · `src/lib/session.ts` ของ QC-Audit- |
-| GEMBA SAFETY | `safety.db.v1` · `gemba.session` · `gemba.admin.session` | ของ Gemba-Safety |
+| GEMBA SAFETY | `safety.db.v1` · `safety.session` · `safety.admin.session` | `src/lib/storageKeys.ts` ของ Gemba-Safety |
 | GEMBA LSW&5S | `gemba.db.v3` · `gemba.session` · `gemba.admin.session` | ของ Gemba_Audit |
 
 > ⚠️ ถ้าแอปไหนขึ้นเลขเวอร์ชันคีย์ (เช่น `qc.db.v3`) ต้องแก้ `SOURCES` ใน `dashboard.html` ตามด้วย
